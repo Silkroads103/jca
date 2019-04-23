@@ -1,1 +1,207 @@
-dgf
+?USE [master]
+GO
+/****** Object:  Database [Montage]    Script Date: 23.04.2019 23:32:12 ******/
+CREATE DATABASE [Montage]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Montage', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\Montage.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'Montage_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\Montage_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [Montage] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Montage].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Montage] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [Montage] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [Montage] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [Montage] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [Montage] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [Montage] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [Montage] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [Montage] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [Montage] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [Montage] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [Montage] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [Montage] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [Montage] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [Montage] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [Montage] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [Montage] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [Montage] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [Montage] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [Montage] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [Montage] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [Montage] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [Montage] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [Montage] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [Montage] SET  MULTI_USER 
+GO
+ALTER DATABASE [Montage] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [Montage] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [Montage] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [Montage] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [Montage] SET DELAYED_DURABILITY = DISABLED 
+GO
+USE [Montage]
+GO
+/****** Object:  Table [dbo].[foundation]    Script Date: 23.04.2019 23:32:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[foundation](
+	[material] [varchar](65) NOT NULL,
+	[width] [real] NOT NULL,
+	[length] [real] NOT NULL,
+	[height] [real] NOT NULL,
+ CONSTRAINT [PK_foundation] PRIMARY KEY CLUSTERED 
+(
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[electricgenerator]    Script Date: 23.04.2019 23:32:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[electricgenerator](
+	[name] [varchar](65) NOT NULL,
+	[size] [real] NOT NULL,
+	[power] [int](11) NOT NULL,
+	[foundation] [varchar](65) NOT NULL,
+ CONSTRAINT [PK_electricgenerator] PRIMARY KEY CLUSTERED 
+(
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[powerÑable]    Script Date: 23.04.2019 23:32:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[powerÑable](
+	[name] [varchar](65) NOT NULL,
+	[size] [real] NOT NULL,
+	[electricgenerator] [varchar](65) NOT NULL,
+ CONSTRAINT [PK_powerÑable] PRIMARY KEY CLUSTERED 
+(
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[controlCable]    Script Date: 23.04.2019 23:32:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[controlCable](
+	[name] [varchar](65) NOT NULL,
+	[size] [real] NOT NULL,
+	[electricgenerator] [varchar](65) NOT NULL,
+ CONSTRAINT [PK_controlCable] PRIMARY KEY CLUSTERED 
+(
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Turboblock]    Script Date: 23.04.2019 23:32:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Turboblock](
+	[name] [varchar](65) NOT NULL,
+	[electricgenerator] [varchar](65) NOT NULL,
+ CONSTRAINT [PK_Turboblock] PRIMARY KEY CLUSTERED 
+(
+	[name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[foundation]  WITH CHECK ADD  CONSTRAINT [FK_foundation_foundation] FOREIGN KEY([name])
+REFERENCES [dbo].[foundation] ([name])
+GO
+ALTER TABLE [dbo].[foundation] CHECK CONSTRAINT [FK_foundation_foundation]
+GO !&
+ALTER TABLE [dbo].[electricgenerator]  WITH CHECK ADD  CONSTRAINT [FK_electricgenerator_foundation] FOREIGN KEY([foundation])
+REFERENCES [dbo].[foundation] ([name])
+GO
+ALTER TABLE [dbo].[electricgenerator] CHECK CONSTRAINT [FK_electricgenerator_foundation]
+GO !$
+ALTER TABLE [dbo].[powerÑable]  WITH CHECK ADD  CONSTRAINT [FK_powerÑable_electricgenerator] FOREIGN KEY([electricgenerator])
+REFERENCES [dbo].[electricgenerator] ([name])
+GO
+ALTER TABLE [dbo].[powerÑable] CHECK CONSTRAINT [FK_powerÑabler_electricgenerator]
+GO !&
+ALTER TABLE [dbo].[controlCable]  WITH CHECK ADD  CONSTRAINT [FK_controlCable_electricgenerator] FOREIGN KEY([electricgenerator])
+REFERENCES [dbo].[electricgenerator] ([name])
+GO
+ALTER TABLE [dbo].[controlCable] CHECK CONSTRAINT [FK_controlCable_electricgenerator]
+GO !&
+ALTER TABLE [dbo].[Turboblock]  WITH CHECK ADD  CONSTRAINT [FK_Turboblock_electricgenerator] FOREIGN KEY([electricgenerator])
+REFERENCES [dbo].[electricgenerator] ([name])
+GO
+ALTER TABLE [dbo].[Turboblock] CHECK CONSTRAINT [FK_Turboblock_electricgenerator]
+GO
+USE [master]
+GO
+ALTER DATABASE [Montage] SET  READ_WRITE 
+GO
