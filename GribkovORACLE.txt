@@ -1,0 +1,157 @@
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: mydb
+-- ------------------------------------------------------
+-- Server version	5.7.24-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `electricgenerator`
+--
+
+DROP TABLE IF EXISTS `electricgenerator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `electricgenerator` (
+  `name` varchar(65) NOT NULL,
+  `size` double DEFAULT NULL,
+  `power` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `electricgenerator`
+--
+
+LOCK TABLES `electricgenerator` WRITE;
+/*!40000 ALTER TABLE `electricgenerator` DISABLE KEYS */;
+/*!40000 ALTER TABLE `electricgenerator` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `foundation`
+--
+
+DROP TABLE IF EXISTS `foundation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `foundation` (
+  `material` varchar(65) NOT NULL,
+  `width` double DEFAULT NULL,
+  `length` double DEFAULT NULL,
+  `height` double DEFAULT NULL,
+  `electricGenerator` varchar(65) NOT NULL,
+  PRIMARY KEY (`name`),
+  KEY `fk_foundation_electricGenerator_idx` (`electricGenerator`),
+  CONSTRAINT `fk_foundation_electricGenerator` FOREIGN KEY (`electricGenerator`) REFERENCES `electricgenerator` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `foundation`
+--
+
+LOCK TABLES `foundation` WRITE;
+/*!40000 ALTER TABLE `foundation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `foundation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `powerÑable` !!!
+--
+
+DROP TABLE IF EXISTS `powerÑable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `powerÑable` (
+  `name` varchar(65) NOT NULL,
+  `electricGenerator` varchar(65) NOT NULL,
+  PRIMARY KEY (`name`),
+  KEY `fk_powerÑable_electricGenerator1_idx` (`electricGenerator`),
+  CONSTRAINT `fk_powerÑable_electricGenerator1` FOREIGN KEY (`electricGenerator`) REFERENCES `electricgenerator` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `powerÑable`
+--
+
+LOCK TABLES `powerÑable` WRITE;
+/*!40000 ALTER TABLE `powerÑable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `powerÑable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `controlCable`   !!!
+--
+
+DROP TABLE IF EXISTS `controlCable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `controlCable` (
+  `name` varchar(65) NOT NULL,
+  `size` double DEFAULT NULL,
+  `electricGenerator` varchar(65) NOT NULL,
+  PRIMARY KEY (`name`),
+  KEY `fk_controlCable_electricGenerator1_idx` (`electricGenerator`),
+  CONSTRAINT `fk_controlCable_electricGenerator1` FOREIGN KEY (`electricGenerator`) REFERENCES `electricgenerator` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `controlCable`
+--
+
+LOCK TABLES `controlCable` WRITE;
+/*!40000 ALTER TABLE `controlCable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `controlCable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `turboblock`  !!!
+--
+
+DROP TABLE IF EXISTS `turboblock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `turboblock` (
+  `name` varchar(65) NOT NULL,
+  `electricGenerator` varchar(65) NOT NULL,
+  PRIMARY KEY (`name`),
+  KEY `fk_Turboblock_electricGenerator1_idx` (`electricGenerator`),
+  CONSTRAINT `fk_Turboblock_electricGenerator1` FOREIGN KEY (`electricGenerator`) REFERENCES `electricgenerator` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `turboblock`  
+--
+
+LOCK TABLES `turboblock` WRITE;
+/*!40000 ALTER TABLE `turboblock` DISABLE KEYS */;
+/*!40000 ALTER TABLE `turboblock` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'mydb'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
