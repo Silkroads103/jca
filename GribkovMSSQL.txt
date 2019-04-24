@@ -180,22 +180,22 @@ ALTER TABLE [dbo].[foundation]  WITH CHECK ADD  CONSTRAINT [FK_foundation_founda
 REFERENCES [dbo].[foundation] ([name])
 GO
 ALTER TABLE [dbo].[foundation] CHECK CONSTRAINT [FK_foundation_foundation]
-GO !&
+GO 
 ALTER TABLE [dbo].[electricgenerator]  WITH CHECK ADD  CONSTRAINT [FK_electricgenerator_foundation] FOREIGN KEY([foundation])
 REFERENCES [dbo].[foundation] ([name])
 GO
 ALTER TABLE [dbo].[electricgenerator] CHECK CONSTRAINT [FK_electricgenerator_foundation]
-GO !$
+GO 
 ALTER TABLE [dbo].[powerÑable]  WITH CHECK ADD  CONSTRAINT [FK_powerÑable_electricgenerator] FOREIGN KEY([electricgenerator])
 REFERENCES [dbo].[electricgenerator] ([name])
 GO
 ALTER TABLE [dbo].[powerÑable] CHECK CONSTRAINT [FK_powerÑabler_electricgenerator]
-GO !&
+GO 
 ALTER TABLE [dbo].[controlCable]  WITH CHECK ADD  CONSTRAINT [FK_controlCable_electricgenerator] FOREIGN KEY([electricgenerator])
 REFERENCES [dbo].[electricgenerator] ([name])
 GO
 ALTER TABLE [dbo].[controlCable] CHECK CONSTRAINT [FK_controlCable_electricgenerator]
-GO !&
+GO 
 ALTER TABLE [dbo].[Turboblock]  WITH CHECK ADD  CONSTRAINT [FK_Turboblock_electricgenerator] FOREIGN KEY([electricgenerator])
 REFERENCES [dbo].[electricgenerator] ([name])
 GO
